@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { ITask } from "../task";
 
 @Component({
@@ -15,5 +15,15 @@ export class TaskCardComponent{
         date: new Date,
         isDone: false,
         isImportant: false
+    }
+
+    @Output() removeEvent = new EventEmitter<number>();
+
+    changeStatus(): void{
+        this.task.isDone = !this.task.isDone;
+    }
+
+    remove(): void{
+        this.removeEvent.emit(this.task.id);
     }
 }
